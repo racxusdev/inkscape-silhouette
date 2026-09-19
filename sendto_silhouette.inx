@@ -1,69 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <inkscape-extension translationdomain="inkscape-silhouette" xmlns="http://www.inkscape.org/namespace/inkscape/extension">
-  <name>Send to Silhouette</name>
+  <name>🔪 Send to Silhouette</name>
   <id>com.github.fablabnbg.inkscape-silhouette.sendto_silhouette</id>
   <dependency type="extension">org.inkscape.output.svg.inkscape</dependency>
   <dependency type="executable" location="inx">sendto_silhouette.py</dependency>
   <param name="active-tab" type="notebook">
-    <page name='silhouette' translatable="no" gui-text='Silhouette'>
-      <param name="x_off" type="float" min="-999.0" max="999.0" precision="2" translatable="no" gui-text="X-Offset [mm]">0.0</param>
-      <param name="y_off" type="float" min="-999.0" max="999.0" precision="2" translatable="no" gui-text="Y-Offset [mm]">0.0</param>
-      <param name="cuttingmat" type="optiongroup" appearance="combo" gui-text="Cutting Mat">
-        <option translatable="no" value="cameo_12x12">Cameo 12x12</option>
-        <option translatable="no" value="cameo_12x24">Cameo 12x24</option>
-        <option translatable="no" value="portrait_8x12">Portrait 8x12</option>
-        <option translatable="no" value="portrait_8_5x12">Portrait 4 8.5x12</option>
-        <option translatable="no" value="cameo_plus_15x15">Cameo Plus 15x15</option>
-        <option translatable="no" value="cameo_pro_24x24">Cameo Pro 24x24</option>
-        <option value="no_mat">None</option>
+    <page name='silhouette' translatable="no" gui-text='⚙️ Main Settings'>
+      <param name="x_off" type="float" min="-999.0" max="999.0" precision="2" translatable="no" gui-text="📐 X-Offset [mm]">0.0</param>
+      <param name="y_off" type="float" min="-999.0" max="999.0" precision="2" translatable="no" gui-text="📐 Y-Offset [mm]">0.0</param>
+      
+      <label xml:space="preserve" indent="2" appearance="header">🎯 Cutting Mat Configuration</label>
+      <param name="cuttingmat" type="optiongroup" appearance="combo" gui-text="Select Cutting Mat">
+        <option translatable="no" value="cameo_12x12">📄 Cameo 12x12</option>
+        <option translatable="no" value="cameo_12x24">📄 Cameo 12x24</option>
+        <option translatable="no" value="portrait_8x12">📄 Portrait 8x12</option>
+        <option translatable="no" value="portrait_8_5x12">📄 Portrait 8.5x12</option>
+        <option translatable="no" value="cameo_plus_15x15">📄 Cameo Plus 15x15</option>
+        <option translatable="no" value="cameo_pro_24x24">📄 Cameo Pro 24x24</option>
+        <option value="no_mat">❌ None (No Mat)</option>
       </param>
-      <param name="toolholder" type="optiongroup" appearance="combo" gui-text="Tool Holder">
-        <option value="1">Red (left tool)</option>
-        <option value="2">Blue (right tool)</option>
+      
+      <label xml:space="preserve" indent="2" appearance="header">🛠️ Tool Configuration</label>
+      <param name="toolholder" type="optiongroup" appearance="combo" gui-text="Tool Holder Position">
+        <option value="1">🔴 Red (Left Tool)</option>
+        <option value="2">🔵 Blue (Right Tool)</option>
       </param>
-      <param name="tool" type="optiongroup" appearance="combo" gui-text="Tool">
-        <option value="default">Media default</option>
-        <option value="pen">Pen</option>
-        <option value="cut">Cut</option>
-        <option value="autoblade">AutoBlade</option>
+      <param name="tool" type="optiongroup" appearance="combo" gui-text="Tool Type">
+        <option value="default">⚙️ Media Default</option>
+        <option value="pen">✏️ Pen Mode</option>
+        <option value="cut">🔪 Cut Mode</option>
+        <option value="autoblade">🔧 AutoBlade</option>
       </param>
-      <label indent="2">'pen' executes the strokes exactly as sent, 'cut' adds small serifs to help the knive find its orientation at corners.</label>
+      <label indent="2" appearance="info">💡 Tip: 'Pen' executes strokes exactly as sent. 'Cut' adds small serifs to help the blade find orientation at corners.</label>
+      
+      <label xml:space="preserve" indent="2" appearance="header">📋 Material/Media Selection</label>
       <!-- CAUTION: keep media list in sync with silhouette/Graphtec.py -->
-      <param name="media" type="optiongroup" appearance="combo" gui-text="Media">
-        <option value="300">[P>0 S>0 D>=0] Custom: use non-zero Pressure and Speed below</option>
-        <option value="100">[P=27,S=10,D=1] SCard without Craft Paper Backing</option>
-        <option value="101">[P=27,S=10,D=1] Card with Craft Paper Backing</option>
-        <option value="102">[P=10,S= 5,D=1] Vinyl Sticker</option>
-        <option value="106">[P=14,S=10,D=1] Film Labels</option>
-        <option value="111">[P=27,S=10,D=1] Thick Media</option>
-        <option value="112">[P= 2,S=10,D=1] Thin Media</option>
-        <option value="113">[P=18,S=10,D=0] Pen</option>
-        <option value="120">[P=30,S=10,D=1] Bond Paper 13-28 lbs (105g)</option>
-        <option value="121">[P=30,S=10,D=1] Bristol Paper 57-67 lbs (145g)</option>
-        <option value="122">[P=30,S=10,D=1] Cardstock 40-60 lbs (90g)</option>
-        <option value="123">[P=30,S=10,D=1] Cover 40-60 lbs (170g)</option>
-        <option value="124">[P= 1,S=10,D=1] Film, Double Matte Translucent</option>
-        <option value="125">[P= 1,S=10,D=1] Film, Vinyl With Adhesive Back</option>
-        <option value="126">[P= 1,S=10,D=1] Film, Window With Kling Adhesive</option>
-        <option value="127">[P=30,S=10,D=1] Index 90 lbs (165g)</option>
-        <option value="128">[P=20,S=10,D=1] Inkjet Photo Paper 28-44 lbs (70g)</option>
-        <option value="129">[P=27,S=10,D=1] Inkjet Photo Paper 45-75 lbs (110g)</option>
-        <option value="130">[P=30,S= 3,D=1] Magnetic Sheet</option>
-        <option value="131">[P=30,S=10,D=1] Offset 24-60 lbs (90g)</option>
-        <option value="132">[P= 5,S=10,D=1] Print Paper Light Weight</option>
-        <option value="133">[P=25,S=10,D=1] Print Paper Medium Weight</option>
-        <option value="134">[P=20,S=10,D=1] Sticker Sheet</option>
-        <option value="135">[P=20,S=10,D=1] Tag 100 lbs (275g)</option>
-        <option value="136">[P=30,S=10,D=1] Text Paper 24-70 lbs (105g)</option>
-        <option value="137">[P=30,S=10,D=1] Vellum Bristol 57-67 lbs (145g)</option>
-        <option value="138">[P=30,S=10,D=1] Writing Paper 24-70 lbs (105g)</option>
+      <param name="media" type="optiongroup" appearance="combo" gui-text="Select Material Type">
+        <option value="300">⚙️ Custom: use non-zero Pressure and Speed below</option>
+        <option value="100">📇 SCard without Craft Paper Backing</option>
+        <option value="101">📇 Card with Craft Paper Backing</option>
+        <option value="102">🏷️ Vinyl Sticker</option>
+        <option value="106">🏷️ Film Labels</option>
+        <option value="111">📦 Thick Media</option>
+        <option value="112">📄 Thin Media</option>
+        <option value="113">✏️ Pen Mode</option>
+        <option value="120">📄 Bond Paper 13-28 lbs (105g)</option>
+        <option value="121">📄 Bristol Paper 57-67 lbs (145g)</option>
+        <option value="122">📇 Cardstock 40-60 lbs (90g)</option>
+        <option value="123">📇 Cover 40-60 lbs (170g)</option>
+        <option value="124">🎬 Film, Double Matte Translucent</option>
+        <option value="125">🎬 Film, Vinyl With Adhesive Back</option>
+        <option value="126">🎬 Film, Window With Kling Adhesive</option>
+        <option value="127">📇 Index 90 lbs (165g)</option>
+        <option value="128">📸 Inkjet Photo Paper 28-44 lbs (70g)</option>
+        <option value="129">📸 Inkjet Photo Paper 45-75 lbs (110g)</option>
+        <option value="130">🧲 Magnetic Sheet</option>
+        <option value="131">📄 Offset 24-60 lbs (90g)</option>
+        <option value="132">📄 Print Paper Light Weight</option>
+        <option value="133">📄 Print Paper Medium Weight</option>
+        <option value="134">🏷️ Sticker Sheet</option>
+        <option value="135">🏷️ Tag 100 lbs (275g)</option>
+        <option value="136">📄 Text Paper 24-70 lbs (105g)</option>
+        <option value="137">📄 Vellum Bristol 57-67 lbs (145g)</option>
+        <option value="138">📄 Writing Paper 24-70 lbs (105g)</option>
       </param>
-      <param name="pressure" type="int" min="0" max="40" gui-text="Pressure">0</param>
-      <param name="speed" type="int" min="0" max="30" gui-text="Speed">0</param>
-      <param name="depth" type="int" min="-1" max="10" gui-text="Blade Depth (for AutoBlade)">-1</param>
-      <label indent="2">Use pressure=0, speed=0, depth=-1 to take the media defaults. Pressure values of 19 or more could trigger the trackenhancing feature, which means a movement along the full media height before start. Beware.</label>
-      <param name="preview" type="bool" gui-text="Preview: show cut pattern before sending">true</param>
-      <label indent="2">Note that for Preview to operate, the `matplotlib' package for Python must be installed.</label>
+      
+      <label xml:space="preserve" indent="2" appearance="header">⚡ Cut Settings</label>
+      <param name="pressure" type="int" min="0" max="40" gui-text="💪 Pressure (0=Default)">0</param>
+      <param name="speed" type="int" min="0" max="30" gui-text="⚡ Speed (0=Default)">0</param>
+      <param name="depth" type="int" min="-1" max="10" gui-text="🔧 Blade Depth (-1=Default, AutoBlade only)">-1</param>
+      <label indent="2" appearance="warning">⚠️ Warning: Pressure values ≥19 may trigger track-enhancing (full media height movement before start).</label>
+      
+      <label xml:space="preserve" indent="2" appearance="header">👁️ Preview Options</label>
+      <param name="preview" type="bool" gui-text="👁️ Show Preview Before Cutting">true</param>
+      <label indent="2" appearance="info">💡 Note: Preview requires the matplotlib Python package.</label>
     </page>
     <page name='opt' gui-text='Options'>
       <param name="dashes" type="bool" gui-text="Convert to dashes">false</param> <label indent="2">Convert paths with dashed strokes to separate subpaths for perforated cuts.</label>
